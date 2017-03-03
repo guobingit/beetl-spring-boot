@@ -1,7 +1,5 @@
 package com.sh.beetl.config;
 
-import java.io.IOException;
-
 import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
@@ -16,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
+
+import java.io.IOException;
 
 @Configuration
 @ComponentScan(basePackages = {"com.sh.beetl.controller"})
