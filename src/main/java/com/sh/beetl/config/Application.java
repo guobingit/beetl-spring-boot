@@ -31,7 +31,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
-@ComponentScan(basePackages = {"com.sh.beetl.controller","com.gb.test.action","com.gb.test.dao"})
+@ComponentScan(basePackages = {"com.sh.beetl.controller","com.gb.test.action","com.gb.test.dao","com.gb.test.service"})
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, ThymeleafAutoConfiguration.class})
 public class Application {
 
