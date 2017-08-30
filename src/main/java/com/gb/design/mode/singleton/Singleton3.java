@@ -1,8 +1,8 @@
 package com.gb.design.mode.singleton;
 
 /**
- * �̰߳�ȫ����������ģʽ�����Լ�synchronized,�ǻ�ķѺܶ���Դ�������� ����������˫�ؼ����,ֻ����jdk1.5+��
- * ���þ�̬�ڲ���
+ * 线程安全的懒汉单例模式（可以加synchronized,那会耗费很多资源，不建议 ，还可以用双重检查锁,只用于jdk1.5+）
+ * 运用静态内部类
  */
 public  class Singleton3 {
 	

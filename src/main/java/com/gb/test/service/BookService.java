@@ -2,14 +2,15 @@
 
 import com.gb.module.utils.DigestUtils;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.beetl.sql.core.SQLManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
 
-/**
+import static org.apache.coyote.http11.Constants.a;
+
+ /**
  * Created by guobin on 2017/4/10.
  */
 @Service
@@ -19,18 +20,14 @@ public class BookService {
     private SQLManager sqlManager;
 
     public void bupdate(){
-        long a = System.currentTimeMillis();
-        System.out.println("a----"+a);
 
         List lc = sqlManager.execute("select count(*) from ssreader",Integer.class,null);
-        Integer count = NumberUtils.toInt(lc.get(0).toString());
-
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             Map<String,Integer> ps = Maps.newHashMap();
             ps.put("top",i*100000);
+            System.out.println("第"+i*100000+"条");
             List<Map> books = sqlManager.execute("select * from ssreader limit #top#,100000", Map.class,ps);
             books.forEach(bb->{
-                //Map<String,String> bb =  books.get(0);
                 Object isbnObject = bb.get("isbn号");
                 if (Objects.nonNull(isbnObject)){
                     String isbn = isbnObject.toString();
@@ -42,15 +39,12 @@ public class BookService {
                     sqlManager.executeUpdate("update ssreader set opacUrl = #opacUrl# where SS号 = #ssid#",params);
                 }
             });
-            System.out.println(System.currentTimeMillis()-a);
         }
-        long c = System.currentTimeMillis();
-        System.out.println("c-b----"+(c-a));
     }
 
     private String getopac(String isbn){
-        String sign = "hebgcdx_opac_tocard";
-        String key = "sv106wJ2wGNsJH4gSZ";
+        String sign = "hebsydx_opac_tocard";
+        String key = "rDRH6ndlQwx0q9aRyX";
         String url = "http://www.sslibrary.com/openapi/book/opacToCard";
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("isbn", isbn);
@@ -68,7 +62,6 @@ public class BookService {
     }
 
     public static void main(String[] args) {
-        long a = System.currentTimeMillis();
         BookService bookService = new BookService();
         System.out.println(bookService.getopac("123"));
         System.out.println(System.currentTimeMillis() - a);

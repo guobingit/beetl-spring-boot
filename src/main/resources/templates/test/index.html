@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>first example</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/avalon.js"></script>
+	<script>
+		var vm = avalon.define({
+			$id: "test",
+			name: "${user.name}",
+			array: [11,22,33],
+			$computed:{
+				//fullName依赖于firstName与lastName
+				fullName: {
+					get: function(){
+						return this.firstName+' '+this.lastName
+					},
+					set: function(val){
+						var arr = val.split(' ')
+						this.firstName = arr[0]
+						this.lastName = arr[1]
+					}
+				}
+			}
+		})
+		//实现添加子属性。avalon在VBScript或Object.defineProperty模式下不支持追加新属性与方法
+		setTimeout(function(){
+			vm.array.set(0, 444)
+		}, 3000)
+	</script>
+</head>
+<body ms-controller="test">
+这是一个beetl servlet例子
+<input ms-duplex="@name">
+<p>Hello,{{@name}}!</p>
+<ul>
+	<li ms-for="($index,el) in @array">{{$index}}--{{el}}</li>
+</ul>
+</body>

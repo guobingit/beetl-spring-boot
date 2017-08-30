@@ -7,6 +7,28 @@ public class User implements Serializable {
     private Integer id;
     private Integer age;
     private String name;
+    private Integer sex;
+
+    public User() {
+    }
+
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public User(Integer id, Integer age, String name) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+    }
+
+    public User(Integer id, Integer age, String name, Integer sex) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.sex = sex;
+    }
 
     public Integer getId() {
         return id;
@@ -32,4 +54,11 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 }
