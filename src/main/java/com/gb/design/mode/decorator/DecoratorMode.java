@@ -4,6 +4,8 @@ import org.junit.Test;
 
 /**
  * 装饰者模式
+ * 装饰者与被装饰者拥有共同的超类，继承的目的是继承类型，而不是行为
+ * 实际上Java 的I/O API就是使用Decorator实现的
  */
 public class DecoratorMode {
 	public interface Component {

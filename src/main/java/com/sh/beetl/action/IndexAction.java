@@ -1,4 +1,4 @@
-package com.sh.beetl.controller;
+package com.sh.beetl.action;
 
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 @Controller
-public class IndexController {
+public class IndexAction {
 	
 	@RequestMapping("/demo")
 	public String index(Model model){

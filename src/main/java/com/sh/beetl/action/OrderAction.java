@@ -1,4 +1,4 @@
-package com.sh.beetl.controller;
+package com.sh.beetl.action;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
