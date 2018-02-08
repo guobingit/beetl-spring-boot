@@ -18,7 +18,10 @@ public class BookService {
 
     @Resource
     private SQLManager sqlManager;
-
+    
+     /**
+      * 一定要给ssreader表的ss号加索引
+      */
     public void bupdate(){
 
         List lc = sqlManager.execute("select count(*) from ssreader",Integer.class,null);
@@ -28,42 +31,43 @@ public class BookService {
             System.out.println("第"+i*100000+"条");
             List<Map> books = sqlManager.execute("select * from ssreader limit #top#,100000", Map.class,ps);
             books.forEach(bb->{
-                Object isbnObject = bb.get("isbn号");
-                if (Objects.nonNull(isbnObject)){
-                    String isbn = isbnObject.toString();
-                    String url = getopac(isbn);
+                Object ssid = bb.get("SS号");
+                String opacUrl = (String)bb.get("opacUrl");
+                if (Objects.nonNull(ssid)){
+                    String ss = ssid.toString();
+                    String url = getopac(ss);
                     Map<String,String> params = Maps.newHashMap();
-                    params.put("ssid",bb.get("SS号").toString());
                     params.put("opacUrl",url);
-
-                    sqlManager.executeUpdate("update ssreader set opacUrl = #opacUrl# where SS号 = #ssid#",params);
+                    params.put("ssid",ss);
+                    sqlManager.executeUpdate("update ssreader set opacUrl = #opacUrl# where ss号 = #ssid#",params);
+//                    sqlManager.update("book.update", params);
                 }
             });
         }
     }
 
-    private String getopac(String isbn){
-        String sign = "hebsydx_opac_tocard";
-        String key = "rDRH6ndlQwx0q9aRyX";
+    private String getopac(String ssid){
+        String sign = "opac_tocard_hebgydx";
+        String key = "uRN^9IWXmwnTHa!ZwD";
         String url = "http://www.sslibrary.com/openapi/book/opacToCard";
         Map<String, String> params = new LinkedHashMap<String, String>();
-        params.put("isbn", isbn);
+        params.put("ssid", ssid);
         params.put("sign", sign);
 
         List<String> values = new ArrayList<String>();
-        values.add("isbn=" + isbn);
         values.add("sign=" + sign);
+        values.add("ssid=" + ssid);
         values.add(key);
 
         String enc = DigestUtils.generateMD5(values.toArray());
         params.put("enc", enc);
-        String aaa = url + "?sign=" + sign + "&isbn=" + isbn + "&enc=" + enc;
+        String aaa = url + "?sign=" + sign + "&ssid=" + ssid + "&enc=" + enc;
         return aaa;
     }
 
     public static void main(String[] args) {
         BookService bookService = new BookService();
-        System.out.println(bookService.getopac("123"));
+        System.out.println(bookService.getopac("11675868"));
         System.out.println(System.currentTimeMillis() - a);
 
     }
