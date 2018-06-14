@@ -1,15 +1,14 @@
 package com.gb.demo.jdk8;
 
-import com.gb.test.entity.User;
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import com.google.common.collect.Lists;
+import com.sh.beetl.entity.User;
 
 /**
- * jdk8¾Û¼¯collectµÄÊ¹ÓÃ
+ * jdk8ï¿½Û¼ï¿½collectï¿½ï¿½Ê¹ï¿½ï¿½
  * Created by guobin on 2017/5/4.
  */
 public class TestCollectors {
@@ -23,11 +22,11 @@ public class TestCollectors {
         Set<String> namesset = users.stream().map(User::getName).collect(Collectors.toSet());
         //toTreeSet
         Set<String> namesset1 = users.stream().map(User::getName).collect(Collectors.toCollection(TreeSet::new));
-        //joining ','Îª¼ä¸ô·û "AAA"ÎªÇ°×º "BBB"Îªºó×º AAAzhangsan,lisi,wangwu,zhaoliuBBB
-        //Îª¿ÕÖ±½ÓºÏ²¢£¬Ò»¸ö²ÎÊý¼¸¸ö·û×éºÏ£¬Èý¸ö²ÎÊý Ç°ºó×º
+        //joining ','Îªï¿½ï¿½ï¿½ï¿½ï¿½ "AAA"ÎªÇ°×º "BBB"Îªï¿½ï¿½×º AAAzhangsan,lisi,wangwu,zhaoliuBBB
+        //Îªï¿½ï¿½Ö±ï¿½ÓºÏ²ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç°ï¿½ï¿½×º
         String jstr = users.stream().map(User::getName).collect(Collectors.joining(",", "AAA", "BBB"));
         System.out.println(jstr);
-        //sumingInt ..long..double ÀÛ¼Ó averagingInt ..long..double Æ½¾ù
+        //sumingInt ..long..double ï¿½Û¼ï¿½ averagingInt ..long..double Æ½ï¿½ï¿½
         Integer sumage = users.stream().collect(Collectors.summingInt(User::getAge));
         System.out.println(sumage);
         //mapping ....

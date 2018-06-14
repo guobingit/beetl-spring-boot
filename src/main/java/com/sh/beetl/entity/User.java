@@ -1,4 +1,4 @@
-package com.gb.test.entity;
+package com.sh.beetl.entity;
 
 import java.io.Serializable;
 

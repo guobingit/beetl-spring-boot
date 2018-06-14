@@ -1,21 +1,21 @@
 package com.sh.beetl.action;
 
-import com.google.common.collect.Maps;
+import javax.annotation.Resource;
+import com.sh.beetl.dao.UserDao;
+import com.sh.beetl.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
-
 @Controller
 public class IndexAction {
 	
+	@Resource
+	private UserDao userDao;
+	
 	@RequestMapping("/demo")
-	public String index(Model model){
-		Map user = Maps.newHashMap();
-		user.put("id", 1);
-		user.put("name", "曹操");
-		user.put("description", "一代枭雄");
+	public String index(Model model) {
+		User user = userDao.findById(1);
 		model.addAttribute("user", user);
 		return "test/index";
 	}
