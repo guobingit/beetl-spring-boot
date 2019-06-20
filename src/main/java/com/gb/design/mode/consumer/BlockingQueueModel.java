@@ -5,15 +5,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Éú²úÕß-Ïû·ÑÕßÄ£Ê½
+ * ç”Ÿäº§è€…-æ¶ˆè´¹è€…æ¨¡å¼
  * <p>
- * Éú²úÕß³ÖĞøÉú²ú£¬Ö±µ½»º³åÇøÂú£¬×èÈû£»»º³åÇø²»Âúºó£¬¼ÌĞøÉú²ú
- * Ïû·ÑÕß³ÖĞøÏû·Ñ£¬Ö±µ½»º³åÇø¿Õ£¬×èÈû£»»º³åÇø²»¿Õºó£¬¼ÌĞøÏû·Ñ
- * Éú²úÕß¿ÉÒÔÓĞ¶à¸ö£¬Ïû·ÑÕßÒ²¿ÉÒÔÓĞ¶à¸ö
+ * ç”Ÿäº§è€…æŒç»­ç”Ÿäº§ï¼Œç›´åˆ°ç¼“å†²åŒºæ»¡ï¼Œé˜»å¡ï¼›ç¼“å†²åŒºä¸æ»¡åï¼Œç»§ç»­ç”Ÿäº§
+ * æ¶ˆè´¹è€…æŒç»­æ¶ˆè´¹ï¼Œç›´åˆ°ç¼“å†²åŒºç©ºï¼Œé˜»å¡ï¼›ç¼“å†²åŒºä¸ç©ºåï¼Œç»§ç»­æ¶ˆè´¹
+ * ç”Ÿäº§è€…å¯ä»¥æœ‰å¤šä¸ªï¼Œæ¶ˆè´¹è€…ä¹Ÿå¯ä»¥æœ‰å¤šä¸ª
  * <p>
- * ¿ÉÍ¨¹ıÈçÏÂÌõ¼şÑéÖ¤Ä£ĞÍÊµÏÖµÄÕıÈ·ĞÔ£º
- * Í¬Ò»²úÆ·µÄÏû·ÑĞĞÎªÒ»¶¨·¢ÉúÔÚÉú²úĞĞÎªÖ®ºó
- * ÈÎÒâÊ±¿Ì£¬»º³åÇø´óĞ¡²»Ğ¡ÓÚ0£¬²»´óÓÚÏŞÖÆÈİÁ¿
+ * å¯é€šè¿‡å¦‚ä¸‹æ¡ä»¶éªŒè¯æ¨¡å‹å®ç°çš„æ­£ç¡®æ€§ï¼š
+ * åŒä¸€äº§å“çš„æ¶ˆè´¹è¡Œä¸ºä¸€å®šå‘ç”Ÿåœ¨ç”Ÿäº§è¡Œä¸ºä¹‹å
+ * ä»»æ„æ—¶åˆ»ï¼Œç¼“å†²åŒºå¤§å°ä¸å°äº0ï¼Œä¸å¤§äºé™åˆ¶å®¹é‡
  */
 public class BlockingQueueModel implements Model {
 
@@ -21,7 +21,7 @@ public class BlockingQueueModel implements Model {
     private final AtomicInteger increTaskNo = new AtomicInteger(0);
 
     public BlockingQueueModel(int cap) {
-        // LinkedBlockingQueue µÄ¶ÓÁĞÊÇ lazy-init µÄ£¬µ« ArrayBlockingQueue ÔÚ´´½¨Ê±¾ÍÒÑ¾­ init
+        // LinkedBlockingQueue çš„é˜Ÿåˆ—æ˜¯ lazy-init çš„ï¼Œä½† ArrayBlockingQueue åœ¨åˆ›å»ºæ—¶å°±å·²ç» init
         this.queue = new LinkedBlockingQueue<>(cap);
     }
 
@@ -40,7 +40,7 @@ public class BlockingQueueModel implements Model {
         @Override
         public void consume() throws InterruptedException {
             Task task = queue.take();
-            // ¹Ì¶¨Ê±¼ä·¶Î§µÄÏû·Ñ£¬Ä£ÄâÏà¶ÔÎÈ¶¨µÄ·şÎñÆ÷´¦Àí¹ı³Ì
+            // å›ºå®šæ—¶é—´èŒƒå›´çš„æ¶ˆè´¹ï¼Œæ¨¡æ‹Ÿç›¸å¯¹ç¨³å®šçš„æœåŠ¡å™¨å¤„ç†è¿‡ç¨‹
             Thread.sleep(500 + (long) (Math.random() * 500));
             System.out.println("consume: " + task.no);
         }
@@ -50,7 +50,7 @@ public class BlockingQueueModel implements Model {
 
         @Override
         public void produce() throws InterruptedException {
-            // ²»¶¨ÆÚÉú²ú£¬Ä£ÄâËæ»úµÄÓÃ»§ÇëÇó
+            // ä¸å®šæœŸç”Ÿäº§ï¼Œæ¨¡æ‹Ÿéšæœºçš„ç”¨æˆ·è¯·æ±‚
             Thread.sleep((long) (Math.random() * 1000));
             Task task = new Task(increTaskNo.getAndIncrement());
             queue.put(task);

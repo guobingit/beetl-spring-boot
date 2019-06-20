@@ -4,7 +4,7 @@ package com.gb.demo.thread;
  * 简单线程测试
  * Created by guobin on 2017/3/2.
  */
-public class GBTestThread {
+public class TicketThread {
 	
 	class SellTicket implements Runnable {
 		
@@ -13,11 +13,18 @@ public class GBTestThread {
 		@Override
 		public void run() {
 			for (int i = 0; i < 30; i++) {
-				if (tnum <= 0) {
-					return;
+				synchronized (this) {
+					if (tnum <= 0) {
+						return;
+					}
+					try {
+						Thread.sleep(100);
+						System.out.println(Thread.currentThread().getName() + "sell ticket---" + tnum);
+						tnum--;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-				System.out.println("sell ticket---" + tnum);
-				tnum--;
 			}
 		}
 	}
@@ -31,7 +38,7 @@ public class GBTestThread {
 	}
 	
 	public static void main(String[] args) {
-		new GBTestThread().test();
+		new TicketThread().test();
 	}
 	
 }

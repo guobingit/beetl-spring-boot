@@ -1,5 +1,8 @@
 package com.gb.test;
 
+import java.util.Date;
+import com.gb.module.utils.DateUtils;
+
 public class TestAuth {
 	
 	/**
@@ -22,8 +25,9 @@ public class TestAuth {
 	}
 	
 	public static void main(String[] args) {
-		String c ="";
-		System.out.println(c.matches("([0][A-Z])+"));
+		String date = "2018-07-31 14:55:04";
+		Date d = DateUtils.strToDate(date, "yyyy-MM-dd HH:mm:ss");
+		System.out.println(d.getTime());
 	}
 }
 
