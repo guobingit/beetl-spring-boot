@@ -8,7 +8,6 @@ import com.google.common.collect.Lists;
 import com.sh.beetl.entity.User;
 
 /**
- * jdk8�ۼ�collect��ʹ��
  * Created by guobin on 2017/5/4.
  */
 public class TestCollectors {
@@ -22,11 +21,8 @@ public class TestCollectors {
         Set<String> namesset = users.stream().map(User::getName).collect(Collectors.toSet());
         //toTreeSet
         Set<String> namesset1 = users.stream().map(User::getName).collect(Collectors.toCollection(TreeSet::new));
-        //joining ','Ϊ����� "AAA"Ϊǰ׺ "BBB"Ϊ��׺ AAAzhangsan,lisi,wangwu,zhaoliuBBB
-        //Ϊ��ֱ�Ӻϲ���һ��������������ϣ��������� ǰ��׺
         String jstr = users.stream().map(User::getName).collect(Collectors.joining(",", "AAA", "BBB"));
         System.out.println(jstr);
-        //sumingInt ..long..double �ۼ� averagingInt ..long..double ƽ��
         Integer sumage = users.stream().collect(Collectors.summingInt(User::getAge));
         System.out.println(sumage);
         //mapping ....

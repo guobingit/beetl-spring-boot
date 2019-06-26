@@ -7,11 +7,11 @@ import java.util.NoSuchElementException;
 
 public class Vertex implements VertexInterface, Serializable {
 	
-	private String label;//±êÊ¶±êµã,¿ÉÒÔÓÃ²»Í¬ÀàĞÍÀ´±êÊ¶¶¥µãÈçString,Integer....
-	private LinkedList<Edge> edgeList; //µ½¸Ã¶¥µãÁÚ½ÓµãµÄ±ß,Êµ¼ÊÒÔjava.util.LinkedList´æ´¢
-	private boolean visited; //±êÊ¶¶¥µãÊÇ·ñÒÑ·ÃÎÊ
-	private VertexInterface previousVertex; //¸Ã¶¥µãµÄÇ°Çı¶¥µã
-	private double cost;//¶¥µãµÄÈ¨Öµ,Óë±ßµÄÈ¨ÖµÒªÇø±ğ¿ªÀ´
+	private String label;//æ ‡è¯†æ ‡ç‚¹,å¯ä»¥ç”¨ä¸åŒç±»å‹æ¥æ ‡è¯†é¡¶ç‚¹å¦‚String,Integer....
+	private LinkedList<Edge> edgeList; //åˆ°è¯¥é¡¶ç‚¹é‚»æ¥ç‚¹çš„è¾¹,å®é™…ä»¥java.util.LinkedListå­˜å‚¨
+	private boolean visited; //æ ‡è¯†é¡¶ç‚¹æ˜¯å¦å·²è®¿é—®
+	private VertexInterface previousVertex; //è¯¥é¡¶ç‚¹çš„å‰é©±é¡¶ç‚¹
+	private double cost;//é¡¶ç‚¹çš„æƒå€¼,ä¸è¾¹çš„æƒå€¼è¦åŒºåˆ«å¼€æ¥
 	
 	public String getLabel() {
 		return label;
@@ -22,17 +22,17 @@ public class Vertex implements VertexInterface, Serializable {
 	}
 	
 	/**
-	 * Task: ±éÀú¸Ã¶¥µãÁÚ½ÓµãµÄµü´úÆ÷--Îª getNeighborInterator()·½·¨ Ìá¹©µü´úÆ÷
-	 * ÓÉÓÚ¶¥µãµÄÁÚ½ÓµãÒÔ±ßµÄĞÎÊ½´æ´¢ÔÚjava.util.ListÖĞ,Òò´Ë½èÖúListµÄµü´úÆ÷À´ÊµÏÖ
-	 * ÓÉÓÚ¶¥µãµÄÁÚ½ÓµãÓÉEdgeÀà·â×°ÆğÀ´ÁË--¼ûEdge.javaµÄ¶¨ÒåµÄµÚÒ»¸öÊôĞÔ
-	 * Òò´Ë£¬Ê×ÏÈ»ñµÃ±éÀúEdge¶ÔÏóµÄµü´úÆ÷,ÔÙ¸ù¾İ»ñµÃµÄEdge¶ÔÏó½âÎö³öÁÚ½Óµã¶ÔÏó
+	 * Task: éå†è¯¥é¡¶ç‚¹é‚»æ¥ç‚¹çš„è¿­ä»£å™¨--ä¸º getNeighborInterator()æ–¹æ³• æä¾›è¿­ä»£å™¨
+	 * ç”±äºé¡¶ç‚¹çš„é‚»æ¥ç‚¹ä»¥è¾¹çš„å½¢å¼å­˜å‚¨åœ¨java.util.Listä¸­,å› æ­¤å€ŸåŠ©Listçš„è¿­ä»£å™¨æ¥å®ç°
+	 * ç”±äºé¡¶ç‚¹çš„é‚»æ¥ç‚¹ç”±Edgeç±»å°è£…èµ·æ¥äº†--è§Edge.javaçš„å®šä¹‰çš„ç¬¬ä¸€ä¸ªå±æ€§
+	 * å› æ­¤ï¼Œé¦–å…ˆè·å¾—éå†Edgeå¯¹è±¡çš„è¿­ä»£å™¨,å†æ ¹æ®è·å¾—çš„Edgeå¯¹è±¡è§£æå‡ºé‚»æ¥ç‚¹å¯¹è±¡
 	 */
 	private class NeighborIterator implements Iterator<VertexInterface> {
 		
 		Iterator<Edge> edgesIterator;
 		
 		private NeighborIterator() {
-			edgesIterator = edgeList.iterator();//»ñµÃ±éÀúedgesList µÄµü´úÆ÷
+			edgesIterator = edgeList.iterator();//è·å¾—éå†edgesList çš„è¿­ä»£å™¨
 		}
 		
 		@Override
@@ -44,8 +44,8 @@ public class Vertex implements VertexInterface, Serializable {
 		public VertexInterface next() {
 			VertexInterface nextNeighbor = null;
 			if (edgesIterator.hasNext()) {
-				Edge edgeToNextNeighbor = edgesIterator.next();//LinkedListÖĞ´æ´¢µÄÊÇEdge
-				nextNeighbor = edgeToNextNeighbor.getEndVertex();//´ÓEdge¶ÔÏóÖĞÈ¡³ö¶¥µã
+				Edge edgeToNextNeighbor = edgesIterator.next();//LinkedListä¸­å­˜å‚¨çš„æ˜¯Edge
+				nextNeighbor = edgeToNextNeighbor.getEndVertex();//ä»Edgeå¯¹è±¡ä¸­å–å‡ºé¡¶ç‚¹
 			} else
 				throw new NoSuchElementException();
 			return nextNeighbor;
