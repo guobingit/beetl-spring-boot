@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+    <!-- 配置名为person的Bean，其实现类是com.gb.spring.ioc.setvalue.Person类 -->
+    <!--该文件根元素是<beans.../>，而有多个子元素<bean.../>，每个<bean.../>对应一个类实例，
+    对于每个类实例，若对应的类有setter函数，则用<property...>元素进行配置，如果有多个setter函数，则如上述配置文件一样，可配置多个<property.../>元素。
+    其中<property.../>name是指属性名，即setter函数参数名，ref则是指传入的参数，ref一般是配置文件中出现的id。
+    而<bean.../>配置中，id则是代表该类实例的标识属性，class则是该实例对应的类一般包含包路径，并且只能是实现类，不能是接口。
+    另外还可以设置延迟初始化，因为依赖注入有预初始化功能，如果不需要则可以设置lazy-init="true"来实现。
+    若限定bean的作用域，则用scope元素，默认的作用域是singleton即单例模式，而prototype是指每次通过容器的getBean()方法获得的bean都是一个新的实例，常用的作用域就是这两种。-->
+    <bean id="person" class="com.gb.spring.ioc.Person">
+        <property name="eye" ref="eye"/>
+        <property name="hand" ref="hand"/>
+    </bean>
+    <bean id="eye" class="com.gb.spring.ioc.EyeRead"/>
+    <bean id="hand" class="com.gb.spring.ioc.HandWrite"/>
+</beans>

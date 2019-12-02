@@ -1,4 +1,4 @@
-package com.gb.demo.Algorithm;
+package com.gb.demo.Algorithm.light;
 
 import java.util.ArrayList;
 import java.util.BitSet;

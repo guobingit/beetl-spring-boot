@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+    <!-- 构造注入则使用<constructor-arg.../>进行配置激活构造函数进行初始化。若出现多个构造函数，则只需对person类多构造几个实例即可。 -->
+    <bean id="person1" class="com.gb.spring.ioc.Person1">
+        <constructor-arg ref="eye"/>
+        <constructor-arg ref="hand"/>
+    </bean>
+    <bean id="eye" class="com.gb.spring.ioc.EyeRead"/>
+    <bean id="hand" class="com.gb.spring.ioc.HandWrite"/>
+</beans>
