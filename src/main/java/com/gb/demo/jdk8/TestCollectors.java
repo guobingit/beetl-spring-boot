@@ -1,11 +1,6 @@
 package com.gb.demo.jdk8;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
@@ -35,6 +30,17 @@ public class TestCollectors {
 		//reducing
 		//groupingBy
 		//toMap
+		// 比较两个list相同的
+		int size = users.stream()
+				.map(t -> users.stream().filter(s -> Objects.nonNull(t.getName()) && Objects.nonNull(s.getName()) && Objects.equals(t.getName(), s.getName())).findAny().orElse(null))
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList())
+				.size();
+		List<String> names1 = users.stream()
+				.map(t -> users.stream().filter(s -> Objects.nonNull(t.getName()) && Objects.nonNull(s.getName()) && Objects.equals(t.getName(), s.getName())).findAny().orElse(null))
+				.filter(Objects::nonNull)
+				.map(r -> r.getName())
+				.collect(Collectors.toList());
 		
 	}
 	
@@ -64,7 +70,7 @@ public class TestCollectors {
 	 * @param twoList
 	 * @return
 	 */
-	public static List<Map<Object, Object>> compareListHitData(List<Map<Object, Object>> oneList, List<Map<Object, Object>> twoList) {
+	public static void compareListHitData(List<Map<Object, Object>> oneList, List<Map<Object, Object>> twoList) {
 		List<Map<Object, Object>> resultList = oneList.stream().map(map -> twoList.stream()
 				.filter(m -> Objects.equals(m.get("id"), map.get("id")))
 				.findFirst().map(m -> {
@@ -72,8 +78,24 @@ public class TestCollectors {
 					return map;
 				}).orElse(null))
 				.filter(Objects::nonNull).collect(Collectors.toList());
-		return resultList;
+		
+		List<User> users1 = Lists.newArrayList(new User(1, 21, "zhangsan", 0), new User(2, 32, "lisi", 1), new User(3, 35, "wangwu", 1), new User(4, 41, "zhaoliu", 1));
+		List<User> users2 = Lists.newArrayList(new User(3, 21, "zhangsan", 0), new User(4, 32, "lisi", 1), new User(5, 35, "wangwu", 1), new User(6, 41, "zhaoliu", 1));
+		// 比较两个list 过滤掉重复的
+		List<User> noClassList1 = users1.stream().filter(s1 ->users2.stream().noneMatch(s2 -> Objects.equals(s1.getId(), s2.getId()))).collect(Collectors.toList());
 	}
 	
+	/**
+	 * 把参数的map 转换成url
+	 */
+	public static void toUrlKey() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("fid", 123);
+		params.put("roleIds", 1);
+		params.put("offset", 0);
+		params.put("limit", 500);
+		String aa = params.entrySet().stream().map(p-> p.getKey() + "=" + p.getValue()).collect(Collectors.joining("&"));
+		System.out.println(aa);
+	}
 	
 }
