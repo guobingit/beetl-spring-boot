@@ -1,10 +1,11 @@
-package com.gb.demo.Algorithm.light;
+package com.gb.demo.Algorithm.bitset;
+
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
-import org.junit.Test;
 
 /**
  * BetSet测试方法
