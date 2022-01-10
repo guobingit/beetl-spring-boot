@@ -1,10 +1,17 @@
 package com.gb.demo.jdk8;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
 import com.sh.beetl.entity.User;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by guobin on 2017/5/4.
@@ -42,6 +49,12 @@ public class TestCollectors {
 				.map(r -> r.getName())
 				.collect(Collectors.toList());
 		
+		
+		List<User> users1 = Lists.newArrayList(new User(1, 21, "zhangsan", 0), new User(2, 32, "lisi", 1), new User(3, 35, "wangwu", 1), new User(4, 41, "zhaoliu", 1));
+		List<User> users2 = Lists.newArrayList(new User(3, 21, "zhangsan", 0), new User(4, 32, "lisi", 1), new User(5, 35, "wangwu", 1), new User(6, 41, "zhaoliu", 1));
+		// 比较两个list 过滤掉重复的
+		List<User> noClassList1 = users1.stream().filter(s1 ->users2.stream().noneMatch(s2 -> Objects.equals(s1.getId(), s2.getId()))).collect(Collectors.toList());
+		System.out.println(123);
 	}
 	
 	/**

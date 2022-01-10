@@ -24,7 +24,7 @@ public class BitSetMethod {
     }
     
     /**
-     * 用于在此BitSet与给定的BitSet(bs)之间执行逻辑或。 当任此BitSet位保持值为true(***或***)给定的位集合(BS)对应位持有true值此BitSet被更新。
+     * 用于在此BitSet与给定的BitSet(bs)之间执行逻辑或。 当此BitSet位保持值为true(***或***)给定的位集合(BS)对应位持有true值此BitSet被更新。
      */
     @Test
     public void or() {
@@ -130,7 +130,7 @@ public class BitSetMethod {
     }
     
     public static void main(String[] args) {
-//        BitSetUtils.containChars("12311cvsfsfsfsfsfsf");
+        BitSetMethod.containChars("12311cvsfsfsfsfsfsf");
     
         BitSet bitSet = new BitSet();
         bitSet.set(0,1);
